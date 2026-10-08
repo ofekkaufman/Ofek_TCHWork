@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Ofek_List.RegisterPage"
+    Title="Register">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="18"
+            VerticalOptions="Center">
+
+            <Label
+                Text="⚽ Ofek Soccer"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#1B5E20" />
+
+            <Label
+                Text="Create your account"
+                FontSize="20"
+                HorizontalOptions="Center"
+                TextColor="Gray" />
+
+            <Entry
+                x:Name="NameEntry"
+                Placeholder="Full Name"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Entry
+                x:Name="EmailEntry"
+                Placeholder="Email"
+                Keyboard="Email"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Entry
+                x:Name="UsernameEntry"
+                Placeholder="Username"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True" />
+
+            <Entry
+                x:Name="ConfirmPasswordEntry"
+                Placeholder="Confirm Password"
+                IsPassword="True" />
+
+            <Button
+                Text="REGISTER"
+                FontAttributes="Bold"
+                FontSize="18"
+                BackgroundColor="#1B5E20"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="55"
+                Clicked="RegisterButton_Clicked" />
+
+            <Button
+                Text="Already have an account? Login"
+                BackgroundColor="Transparent"
+                TextColor="#1B5E20"
+                Clicked="LoginButton_Clicked" />
+
+            <Label
+                x:Name="MessageLabel"
+                Text=""
+                HorizontalOptions="Center"
+                FontAttributes="Bold" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Ofek_List.LoginPage"
+    Title="Login">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30"
+            Spacing="20"
+            VerticalOptions="Center">
+
+            <Label
+                Text="⚽ Ofek Soccer"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#1B5E20" />
+
+            <Label
+                Text="Welcome back!"
+                FontSize="20"
+                HorizontalOptions="Center"
+                TextColor="Gray" />
+
+            <Entry
+                x:Name="UsernameEntry"
+                Placeholder="Username"
+                Keyboard="Text"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Entry
+                x:Name="PasswordEntry"
+                Placeholder="Password"
+                IsPassword="True"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Button
+                x:Name="LoginButton"
+                Text="LOGIN"
+                FontAttributes="Bold"
+                FontSize="18"
+                BackgroundColor="#1B5E20"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="55"
+                Clicked="LoginButton_Clicked" />
+
+            <Label
+                x:Name="MessageLabel"
+                Text=""
+                HorizontalOptions="Center"
+                TextColor="Red"
+                FontAttributes="Bold" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
