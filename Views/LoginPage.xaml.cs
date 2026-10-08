@@ -9,32 +9,56 @@ public partial class LoginPage : ContentPage
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
-        string username = UsernameEntry.Text;
-        string password = PasswordEntry.Text;
+        string email = UsernameEntry.Text?.Trim() ?? "";
+        string password = PasswordEntry.Text ?? "";
 
-        if (string.IsNullOrWhiteSpace(username) ||
+        if (string.IsNullOrWhiteSpace(email) ||
             string.IsNullOrWhiteSpace(password))
         {
-            MessageLabel.Text = "Please enter username and password.";
+            await DisplayAlert(
+                "Missing information",
+                "Please enter your email and password.",
+                "OK");
+
             return;
         }
 
+        LoginButton.IsEnabled = false;
+        LoginButton.Text = "Signing in...";
+
+        await Task.Delay(300);
+
         // Temporary login
-        // We will connect this to your database later.
-        if (username == "admin" && password == "1234")
+        // Replace this with your database authentication later.
+        if (email == "admin" && password == "1234")
         {
-            MessageLabel.TextColor = Colors.Green;
-            MessageLabel.Text = "Login successful!";
+            LoginButton.Text = "Log In";
+            LoginButton.IsEnabled = true;
 
             await DisplayAlert(
-                "Welcome",
-                "You have successfully logged in!",
+                "Welcome back!",
+                "You have successfully logged in.",
                 "OK");
+
+            return;
         }
-        else
-        {
-            MessageLabel.TextColor = Colors.Red;
-            MessageLabel.Text = "Wrong username or password.";
-        }
+
+        LoginButton.Text = "Log In";
+        LoginButton.IsEnabled = true;
+
+        await DisplayAlert(
+            "Login failed",
+            "The email or password is incorrect.",
+            "OK");
+    }
+
+    private async void RegisterNav_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new RegisterPage());
+    }
+
+    private void LoginNav_Clicked(object sender, EventArgs e)
+    {
+        // Already on the login page.
     }
 }

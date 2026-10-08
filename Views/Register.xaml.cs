@@ -9,11 +9,11 @@ public partial class RegisterPage : ContentPage
 
     private async void RegisterButton_Clicked(object sender, EventArgs e)
     {
-        string name = NameEntry.Text;
-        string email = EmailEntry.Text;
-        string username = UsernameEntry.Text;
-        string password = PasswordEntry.Text;
-        string confirmPassword = ConfirmPasswordEntry.Text;
+        string name = NameEntry.Text?.Trim() ?? "";
+        string email = EmailEntry.Text?.Trim() ?? "";
+        string username = UsernameEntry.Text?.Trim() ?? "";
+        string password = PasswordEntry.Text ?? "";
+        string confirmPassword = ConfirmPasswordEntry.Text ?? "";
 
         if (string.IsNullOrWhiteSpace(name) ||
             string.IsNullOrWhiteSpace(email) ||
@@ -21,37 +21,64 @@ public partial class RegisterPage : ContentPage
             string.IsNullOrWhiteSpace(password) ||
             string.IsNullOrWhiteSpace(confirmPassword))
         {
-            MessageLabel.TextColor = Colors.Red;
-            MessageLabel.Text = "Please fill in all fields.";
+            await DisplayAlert(
+                "Missing information",
+                "Please fill in all fields.",
+                "OK");
+
+            return;
+        }
+
+        if (!TermsCheckBox.IsChecked)
+        {
+            await DisplayAlert(
+                "Terms required",
+                "You must agree to the Terms of Play and Privacy Policy.",
+                "OK");
+
+            return;
+        }
+
+        if (password.Length < 8)
+        {
+            await DisplayAlert(
+                "Password too short",
+                "Your password must contain at least 8 characters.",
+                "OK");
+
             return;
         }
 
         if (password != confirmPassword)
         {
-            MessageLabel.TextColor = Colors.Red;
-            MessageLabel.Text = "Passwords do not match.";
+            await DisplayAlert(
+                "Passwords don't match",
+                "Please make sure both password fields are identical.",
+                "OK");
+
             return;
         }
 
-        if (password.Length < 4)
+        RegisterButton.IsEnabled = false;
+        RegisterButton.Text = "Creating account...";
+
+        await Task.Delay(400);
+
+        // Registration will be connected to your database later.
+
+        RegisterButton.Text = "Create Account";
+        RegisterButton.IsEnabled = true;
+
+        bool goToLogin = await DisplayAlert(
+            "Account created!",
+            $"Welcome to Ligat Fantasy, {name}!",
+            "Log In",
+            "Stay here");
+
+        if (goToLogin)
         {
-            MessageLabel.TextColor = Colors.Red;
-            MessageLabel.Text = "Password must be at least 4 characters.";
-            return;
+            await Navigation.PushAsync(new LoginPage());
         }
-
-        // Registration successful for now.
-        // Later we will save the user to your database.
-
-        MessageLabel.TextColor = Colors.Green;
-        MessageLabel.Text = "Registration successful!";
-
-        await DisplayAlert(
-            "Success",
-            "Your account has been created!",
-            "OK");
-
-        await Navigation.PushAsync(new LoginPage());
     }
 
     private async void LoginButton_Clicked(object sender, EventArgs e)

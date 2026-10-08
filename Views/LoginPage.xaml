@@ -1,60 +1,468 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Ofek_List.LoginPage"
-    Title="Login">
+    NavigationPage.HasNavigationBar="False"
+    BackgroundColor="#111318">
 
-    <ScrollView>
-        <VerticalStackLayout
-            Padding="30"
-            Spacing="20"
-            VerticalOptions="Center">
+    <Grid RowDefinitions="64,*">
 
-            <Label
-                Text="⚽ Ofek Soccer"
-                FontSize="32"
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                TextColor="#1B5E20" />
+        <!-- ==================== TOP NAVBAR ==================== -->
 
-            <Label
-                Text="Welcome back!"
-                FontSize="20"
-                HorizontalOptions="Center"
-                TextColor="Gray" />
+        <Border
+            Grid.Row="0"
+            BackgroundColor="#15171C"
+            Stroke="#292D35"
+            StrokeThickness="1">
 
-            <Entry
-                x:Name="UsernameEntry"
-                Placeholder="Username"
-                Keyboard="Text"
-                ClearButtonVisibility="WhileEditing" />
+            <Grid
+                Padding="22,0"
+                ColumnDefinitions="Auto,*,Auto">
 
-            <Entry
-                x:Name="PasswordEntry"
-                Placeholder="Password"
-                IsPassword="True"
-                ClearButtonVisibility="WhileEditing" />
+                <!-- Logo -->
+                <HorizontalStackLayout
+                    Grid.Column="0"
+                    Spacing="10"
+                    VerticalOptions="Center">
 
-            <Button
-                x:Name="LoginButton"
-                Text="LOGIN"
-                FontAttributes="Bold"
-                FontSize="18"
-                BackgroundColor="#1B5E20"
-                TextColor="White"
-                CornerRadius="10"
-                HeightRequest="55"
-                Clicked="LoginButton_Clicked" />
+                    <Border
+                        WidthRequest="26"
+                        HeightRequest="26"
+                        BackgroundColor="#E5BD35"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 6">
 
-            <Label
-                x:Name="MessageLabel"
-                Text=""
-                HorizontalOptions="Center"
-                TextColor="Red"
-                FontAttributes="Bold" />
+                        <Label
+                            Text="⚽"
+                            FontSize="14"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Border>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                    <Label
+                        Text="Ligat Fantasy"
+                        FontSize="17"
+                        FontAttributes="Bold"
+                        TextColor="#F4F4F5"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- Navigation -->
+                <HorizontalStackLayout
+                    Grid.Column="2"
+                    Spacing="28"
+                    VerticalOptions="Center">
+
+                    <Button
+                        Text="Log In"
+                        BackgroundColor="Transparent"
+                        TextColor="#F0F0F2"
+                        FontSize="13"
+                        Padding="0"
+                        Clicked="LoginNav_Clicked" />
+
+                    <Button
+                        Text="Register"
+                        BackgroundColor="Transparent"
+                        TextColor="#F0F0F2"
+                        FontSize="13"
+                        Padding="0"
+                        Clicked="RegisterNav_Clicked" />
+
+                    <Button
+                        Text="How to play"
+                        BackgroundColor="Transparent"
+                        TextColor="#F0F0F2"
+                        FontSize="13"
+                        Padding="0" />
+
+                    <Button
+                        Text="Prizes"
+                        BackgroundColor="Transparent"
+                        TextColor="#F0F0F2"
+                        FontSize="13"
+                        Padding="0" />
+
+                    <Button
+                        Text="Play free"
+                        BackgroundColor="#E5BD35"
+                        TextColor="#17181B"
+                        FontAttributes="Bold"
+                        FontSize="13"
+                        CornerRadius="9"
+                        Padding="20,9"
+                        HeightRequest="40"
+                        Clicked="RegisterNav_Clicked" />
+
+                </HorizontalStackLayout>
+
+            </Grid>
+        </Border>
+
+
+        <!-- ==================== MAIN CONTENT ==================== -->
+
+        <ScrollView Grid.Row="1">
+
+            <Grid
+                Padding="60,38"
+                ColumnDefinitions="1.35*,0.85*"
+                ColumnSpacing="18"
+                MaximumWidthRequest="1100"
+                HorizontalOptions="Center">
+
+                <!-- ==================== LEFT SIDE ==================== -->
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Spacing="12"
+                    VerticalOptions="Center">
+
+                    <!-- Hero -->
+                    <Border
+                        HeightRequest="350"
+                        BackgroundColor="#1D2027"
+                        Stroke="#353A45"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 8">
+
+                        <Grid>
+
+                            <!-- Decorative football pitch -->
+                            <BoxView
+                                BackgroundColor="#1D2027" />
+
+                            <VerticalStackLayout
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Spacing="12">
+
+                                <Label
+                                    Text="⚽"
+                                    FontSize="72"
+                                    HorizontalOptions="Center"
+                                    Opacity="0.8" />
+
+                                <Label
+                                    Text="LIGAT FANTASY"
+                                    FontSize="26"
+                                    FontAttributes="Bold"
+                                    TextColor="#E5BD35"
+                                    HorizontalOptions="Center" />
+
+                                <Label
+                                    Text="Build your dream squad"
+                                    FontSize="16"
+                                    TextColor="#AEB3BE"
+                                    HorizontalOptions="Center" />
+
+                            </VerticalStackLayout>
+
+                            <!-- Decorative lines -->
+                            <BoxView
+                                WidthRequest="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Fill"
+                                BackgroundColor="#343943"
+                                Opacity="0.6" />
+
+                            <BoxView
+                                HeightRequest="1"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                BackgroundColor="#343943"
+                                Opacity="0.6" />
+
+                        </Grid>
+                    </Border>
+
+                    <!-- Tags -->
+                    <HorizontalStackLayout Spacing="10">
+
+                        <Border
+                            BackgroundColor="#E5BD35"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="15,5">
+
+                            <Label
+                                Text="Season 2025/26"
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                TextColor="#17181B" />
+                        </Border>
+
+                        <Border
+                            BackgroundColor="#17191E"
+                            Stroke="#454A56"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="15,5">
+
+                            <Label
+                                Text="Free to play"
+                                FontSize="10"
+                                TextColor="#D7D9DE" />
+                        </Border>
+
+                    </HorizontalStackLayout>
+
+                    <Label
+                        Text="Draft your dream squad"
+                        FontSize="23"
+                        FontAttributes="Bold"
+                        TextColor="#F1F2F4"
+                        Margin="0,2,0,0" />
+
+                    <Label
+                        Text="Pick 15 players from all 14 Israeli Premier League clubs, set your lineup every matchday and go head-to-head with your friends for the title."
+                        FontSize="13"
+                        LineHeight="1.35"
+                        TextColor="#D0D3D9"
+                        MaximumWidthRequest="600" />
+
+                    <Label
+                        Text="Matchday 14 deadline: Saturday 20 December, 15:00 IST"
+                        FontSize="11"
+                        TextColor="#A7ABB4"
+                        Margin="0,4,0,0" />
+
+                </VerticalStackLayout>
+
+
+                <!-- ==================== LOGIN CARD ==================== -->
+
+                <Border
+                    Grid.Column="1"
+                    BackgroundColor="#121A13"
+                    Stroke="#293C2B"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="14"
+                    VerticalOptions="Center">
+
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="#000000"
+                            Opacity="0.45"
+                            Radius="18"
+                            Offset="0,8" />
+                    </Border.Shadow>
+
+                    <VerticalStackLayout
+                        Padding="0,4"
+                        Spacing="13">
+
+                        <!-- Card header -->
+
+                        <HorizontalStackLayout
+                            Spacing="10"
+                            Margin="0,0,0,3">
+
+                            <Border
+                                WidthRequest="26"
+                                HeightRequest="26"
+                                BackgroundColor="Transparent"
+                                Stroke="#E5BD35"
+                                StrokeThickness="1.5"
+                                StrokeShape="RoundRectangle 13">
+
+                                <Label
+                                    Text="◆"
+                                    FontSize="10"
+                                    TextColor="#E5BD35"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+                            </Border>
+
+                            <Label
+                                Text="Ligat Fantasy"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#F1F2F4"
+                                VerticalOptions="Center" />
+
+                        </HorizontalStackLayout>
+
+                        <Label
+                            Text="Sign in to your draft room"
+                            FontSize="13"
+                            TextColor="#D2D5D9"
+                            Margin="0,0,0,10" />
+
+
+                        <!-- EMAIL -->
+
+                        <Label
+                            Text="Email"
+                            FontSize="10"
+                            FontAttributes="Bold"
+                            TextColor="#E1E3E6" />
+
+                        <Border
+                            HeightRequest="45"
+                            BackgroundColor="#171B19"
+                            Stroke="#46504B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8">
+
+                            <Grid ColumnDefinitions="38,*">
+
+                                <Label
+                                    Text="✉"
+                                    FontSize="15"
+                                    TextColor="#89928C"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+
+                                <Entry
+                                    x:Name="UsernameEntry"
+                                    Grid.Column="1"
+                                    Placeholder="you@example.com"
+                                    PlaceholderColor="#68706B"
+                                    TextColor="#F0F1F2"
+                                    Keyboard="Email"
+                                    FontSize="12"
+                                    BackgroundColor="Transparent"
+                                    ClearButtonVisibility="WhileEditing" />
+
+                            </Grid>
+                        </Border>
+
+
+                        <!-- PASSWORD -->
+
+                        <Label
+                            Text="Password"
+                            FontSize="10"
+                            FontAttributes="Bold"
+                            TextColor="#E1E3E6"
+                            Margin="0,2,0,0" />
+
+                        <Border
+                            HeightRequest="45"
+                            BackgroundColor="#171B19"
+                            Stroke="#46504B"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8">
+
+                            <Grid ColumnDefinitions="38,*">
+
+                                <Label
+                                    Text="🔒"
+                                    FontSize="13"
+                                    TextColor="#89928C"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center" />
+
+                                <Entry
+                                    x:Name="PasswordEntry"
+                                    Grid.Column="1"
+                                    Placeholder="Enter your password"
+                                    PlaceholderColor="#68706B"
+                                    TextColor="#F0F1F2"
+                                    IsPassword="True"
+                                    FontSize="12"
+                                    BackgroundColor="Transparent" />
+
+                            </Grid>
+                        </Border>
+
+
+                        <!-- OPTIONS -->
+
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+
+                            <HorizontalStackLayout
+                                Grid.Column="0"
+                                Spacing="5">
+
+                                <CheckBox
+                                    x:Name="RememberMeCheckBox"
+                                    Color="#E5BD35"
+                                    IsChecked="True"
+                                    Scale="0.85" />
+
+                                <Label
+                                    Text="Remember me"
+                                    FontSize="10"
+                                    TextColor="#D4D6D8"
+                                    VerticalOptions="Center" />
+
+                            </HorizontalStackLayout>
+
+                            <Button
+                                Grid.Column="2"
+                                Text="Forgot password?"
+                                BackgroundColor="Transparent"
+                                TextColor="#D9DBDE"
+                                FontSize="10"
+                                Padding="0" />
+
+                        </Grid>
+
+
+                        <!-- LOGIN BUTTON -->
+
+                        <Button
+                            x:Name="LoginButton"
+                            Text="Log In"
+                            FontSize="13"
+                            FontAttributes="Bold"
+                            BackgroundColor="#E5BD35"
+                            TextColor="#17181B"
+                            CornerRadius="7"
+                            HeightRequest="44"
+                            Clicked="LoginButton_Clicked" />
+
+
+                        <!-- DIVIDER -->
+
+                        <BoxView
+                            HeightRequest="1"
+                            BackgroundColor="#303832"
+                            Margin="0,4,0,2" />
+
+
+                        <Label
+                            Text="New to the game?"
+                            FontSize="11"
+                            TextColor="#D3D6D8"
+                            HorizontalOptions="Center">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Tapped="RegisterNav_Clicked" />
+                            </Label.GestureRecognizers>
+
+                        </Label>
+
+                        <Button
+                            Text="Create an account"
+                            BackgroundColor="Transparent"
+                            TextColor="#E5BD35"
+                            FontAttributes="Bold"
+                            FontSize="11"
+                            Padding="0"
+                            Clicked="RegisterNav_Clicked" />
+
+                        <Label
+                            Text="By signing in you agree to the Terms of Play and the Privacy Policy."
+                            FontSize="8"
+                            TextColor="#8E9690"
+                            HorizontalTextAlignment="Center"
+                            Margin="0,3,0,4" />
+
+                    </VerticalStackLayout>
+
+                </Border>
+
+            </Grid>
+
+        </ScrollView>
+
+    </Grid>
 
 </ContentPage>
