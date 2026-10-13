@@ -1,10 +1,11 @@
+
 using Ofek_List.Models;
 
 namespace Ofek_List.Services;
 
 public class KDB
 {
-    public static List<Player> PlayersList = new List<Player>
+    public static List<Player> PlayersList = new()
     {
         new Player
         {
@@ -13,7 +14,6 @@ public class KDB
             Goals = 3,
             Position = "Forward"
         },
-
         new Player
         {
             Id = 2,
@@ -21,7 +21,6 @@ public class KDB
             Goals = 5,
             Position = "Midfielder"
         },
-
         new Player
         {
             Id = 3,
@@ -29,7 +28,6 @@ public class KDB
             Goals = 0,
             Position = "Defender"
         },
-
         new Player
         {
             Id = 4,
@@ -37,7 +35,6 @@ public class KDB
             Goals = 4,
             Position = "Forward"
         },
-
         new Player
         {
             Id = 5,
@@ -46,4 +43,6 @@ public class KDB
             Position = "Midfielder"
         }
     };
+
+    public static List<User> UsersList = new();
 }
