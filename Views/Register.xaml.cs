@@ -29,15 +29,7 @@ public partial class RegisterPage : ContentPage
             return;
         }
 
-        if (!TermsCheckBox.IsChecked)
-        {
-            await DisplayAlert(
-                "Terms required",
-                "You must agree to the Terms of Play and Privacy Policy.",
-                "OK");
 
-            return;
-        }
 
         if (password.Length < 8)
         {

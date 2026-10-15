@@ -85,18 +85,6 @@
                         BackgroundColor="#F5F5F5" />
                 </VerticalStackLayout>
 
-                <HorizontalStackLayout Spacing="8">
-                    <CheckBox
-                        x:Name="TermsCheckBox"
-                        Color="#D0A900" />
-
-                    <Label
-                        Text="I agree to the Terms of Play and Privacy Policy"
-                        TextColor="#555555"
-                        FontSize="12"
-                        VerticalOptions="Center" />
-                </HorizontalStackLayout>
-
                 <Button
                     x:Name="RegisterButton"
                     Text="Register"
