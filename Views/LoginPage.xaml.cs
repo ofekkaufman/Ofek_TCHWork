@@ -1,64 +1,47 @@
+using Ofek_List.Services;
+
 namespace Ofek_List;
 
 public partial class LoginPage : ContentPage
 {
+    private readonly UserService _userService = new();
+
     public LoginPage()
     {
         InitializeComponent();
     }
 
-    private async void LoginButton_Clicked(object sender, EventArgs e)
+    private async void LoginButton_Clicked(
+        object sender, EventArgs e)
     {
-        string email = UsernameEntry.Text?.Trim() ?? "";
+        string username = UsernameEntry.Text?.Trim() ?? "";
         string password = PasswordEntry.Text ?? "";
 
-        if (string.IsNullOrWhiteSpace(email) ||
+        MessageLabel.Text = "";
+
+        if (string.IsNullOrWhiteSpace(username) ||
             string.IsNullOrWhiteSpace(password))
         {
-            await DisplayAlert(
-                "Missing information",
-                "Please enter your email and password.",
-                "OK");
-
+            MessageLabel.Text = "Please enter your email/username and password.";
             return;
         }
 
-        LoginButton.IsEnabled = false;
-        LoginButton.Text = "Signing in...";
-
-        await Task.Delay(300);
-
-        // Temporary login
-        // Replace this with your database authentication later.
-        if (email == "admin" && password == "1234")
+        if (_userService.Login(username, password, out string message))
         {
-            LoginButton.Text = "Log In";
-            LoginButton.IsEnabled = true;
+            await DisplayAlert("Success", message, "OK");
 
-            await DisplayAlert(
-                "Welcome back!",
-                "You have successfully logged in.",
-                "OK");
-
-            return;
+            Application.Current!.Windows[0].Page =
+                new NavigationPage(new MainPage());
         }
-
-        LoginButton.Text = "Log In";
-        LoginButton.IsEnabled = true;
-
-        await DisplayAlert(
-            "Login failed",
-            "The email or password is incorrect.",
-            "OK");
+        else
+        {
+            MessageLabel.Text = message;
+        }
     }
 
-    private async void RegisterNav_Clicked(object sender, EventArgs e)
+    private async void RegisterNav_Clicked(
+        object sender, TappedEventArgs e)
     {
         await Navigation.PushAsync(new RegisterPage());
-    }
-
-    private void LoginNav_Clicked(object sender, EventArgs e)
-    {
-        // Already on the login page.
     }
 }

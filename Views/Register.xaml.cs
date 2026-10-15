@@ -1,13 +1,18 @@
+using Ofek_List.Services;
+
 namespace Ofek_List;
 
 public partial class RegisterPage : ContentPage
 {
+    private readonly UserService _userService = new();
+
     public RegisterPage()
     {
         InitializeComponent();
     }
 
-    private async void RegisterButton_Clicked(object sender, EventArgs e)
+    private async void RegisterButton_Clicked(
+        object sender, EventArgs e)
     {
         string name = NameEntry.Text?.Trim() ?? "";
         string email = EmailEntry.Text?.Trim() ?? "";
@@ -15,66 +20,73 @@ public partial class RegisterPage : ContentPage
         string password = PasswordEntry.Text ?? "";
         string confirmPassword = ConfirmPasswordEntry.Text ?? "";
 
+        MessageLabel.Text = "";
+
         if (string.IsNullOrWhiteSpace(name) ||
             string.IsNullOrWhiteSpace(email) ||
             string.IsNullOrWhiteSpace(username) ||
             string.IsNullOrWhiteSpace(password) ||
             string.IsNullOrWhiteSpace(confirmPassword))
         {
-            await DisplayAlert(
-                "Missing information",
-                "Please fill in all fields.",
-                "OK");
-
+            MessageLabel.Text = "Please fill in all fields.";
             return;
         }
 
-
+        if (!email.Contains('@') ||
+            !email.Contains('.'))
+        {
+            MessageLabel.Text = "Please enter a valid email.";
+            return;
+        }
 
         if (password.Length < 8)
         {
-            await DisplayAlert(
-                "Password too short",
-                "Your password must contain at least 8 characters.",
-                "OK");
-
+            MessageLabel.Text =
+                "Your password must contain at least 8 characters.";
             return;
         }
 
         if (password != confirmPassword)
         {
-            await DisplayAlert(
-                "Passwords don't match",
-                "Please make sure both password fields are identical.",
-                "OK");
-
+            MessageLabel.Text = "Passwords don't match.";
             return;
         }
 
         RegisterButton.IsEnabled = false;
         RegisterButton.Text = "Creating account...";
 
-        await Task.Delay(400);
-
-        // Registration will be connected to your database later.
-
-        RegisterButton.Text = "Create Account";
-        RegisterButton.IsEnabled = true;
-
-        bool goToLogin = await DisplayAlert(
-            "Account created!",
-            $"Welcome to Ligat Fantasy, {name}!",
-            "Log In",
-            "Stay here");
-
-        if (goToLogin)
+        try
         {
-            await Navigation.PushAsync(new LoginPage());
+            bool success = _userService.Register(
+                name,
+                email,
+                username,
+                password,
+                out string message);
+
+            if (!success)
+            {
+                MessageLabel.Text = message;
+                return;
+            }
+
+            await DisplayAlert(
+                "Account created!",
+                $"Welcome to Ligat Fantasy, {name}!",
+                "Log In");
+
+            await Navigation.PopAsync();
+        }
+        finally
+        {
+            RegisterButton.Text = "Register";
+            RegisterButton.IsEnabled = true;
         }
     }
 
-    private async void LoginButton_Clicked(object sender, EventArgs e)
+    private async void LoginButton_Clicked(
+        object sender, TappedEventArgs e)
     {
-        await Navigation.PushAsync(new LoginPage());
+        await Navigation.PopAsync();
     }
 }
